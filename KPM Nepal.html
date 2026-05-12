@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>네팔 단기선교 제안서</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+            overflow: hidden;
+        }
+        @media (min-width: 768px) {
+            .chart-container { height: 400px; }
+        }
+        .timeline-line {
+            position: relative;
+        }
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 1rem;
+            width: 4px;
+            background-color: #e2e8f0;
+            z-index: 0;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -1.1rem;
+            top: 0.25rem;
+            height: 1.25rem;
+            width: 1.25rem;
+            border-radius: 9999px;
+            background-color: white;
+            border-width: 4px;
+            z-index: 10;
+        }
+        html { scroll-behavior: smooth; }
+        .pdf-page-break { page-break-inside: avoid; }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#1E3A8A',
+                            sky: '#0EA5E9',
+                            amber: '#F59E0B',
+                            rose: '#E11D48',
+                            bg: '#F8FAFC',
+                            card: '#FFFFFF'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-brand-bg text-gray-800 font-sans antialiased selection:bg-brand-amber selection:text-white pb-20">
+
+    <div class="fixed bottom-8 right-8 z-50" id="downloadBtnContainer">
+        <button id="downloadPdfBtn" class="bg-brand-blue hover:bg-blue-900 text-white font-bold py-4 px-6 rounded-full shadow-2xl flex items-center transition-transform transform hover:scale-105 border-2 border-white cursor-pointer">
+            <span class="mr-3 text-2xl">&#128196;</span> 
+            <div class="text-left">
+                <div class="text-sm font-normal leading-tight">A4 최적화</div>
+                <div class="text-lg leading-tight">PDF 다운로드</div>
+            </div>
+        </button>
+    </div>
+
+    <nav class="bg-brand-blue text-white sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center font-bold text-xl tracking-wide">
+                    <span class="mr-2 text-2xl">&#127757;</span> KPM 네팔 최우성
+                </div>
+                <div class="hidden md:flex space-x-4">
+                    <a href="#overview" class="hover:bg-blue-800 px-3 py-2 rounded-md text-sm font-medium transition">개요</a>
+                    <a href="#logistics" class="hover:bg-blue-800 px-3 py-2 rounded-md text-sm font-medium transition">항공/예산</a>
+                    <a href="#ministry" class="hover:bg-blue-800 px-3 py-2 rounded-md text-sm font-medium transition">사역 모델</a>
+                    <a href="#execution" class="hover:bg-blue-800 px-3 py-2 rounded-md text-sm font-medium transition">일정/안내사항</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="pdf-content-area" class="bg-brand-bg">
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+            
+            <section id="overview" class="py-12 md:py-16 text-center pdf-page-break">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-brand-blue mb-6 tracking-tight">네팔 단기선교 제안서</h1>
+                <h2 class="text-xl md:text-2xl font-semibold text-brand-sky mb-6">영혼 구원과 현지 교회 세우기</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    주님의 이름으로 문안드립니다. 본 제안서는 후원교회의 네팔 단기선교 기획을 돕기 위해 KPM의 선교 지침과 최신 현장 상황을 반영하여 작성되었습니다. 교회의 상황과 비전에 맞는 최적의 선교 방안을 데이터 기반으로 직관적으로 탐색해 보시기 바랍니다.
+                </p>
+            </section>
+
+            <section id="logistics" class="pt-16 scroll-mt-16">
+                <div class="mb-8 border-l-4 border-brand-amber pl-4">
+                    <h2 class="text-3xl font-bold text-brand-blue">1. 항공편 및 현지 예산 계획</h2>
+                </div>
+                <p class="text-gray-700 mb-8 text-lg">
+                    인천-카트만두 간 주요 항공사의 소요 시간 및 예상 비용과, 물가 상승률(약 25~30%)이 반영된 1주일/2주일 기준의 1인당 상세 체류 및 사역 예산을 시각화하여 확인하실 수 있습니다.
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-brand-card rounded-2xl shadow-lg p-6 md:p-8 pdf-page-break">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2 flex items-center"><span class="text-2xl mr-2">&#9992;&#65039;</span> 항공편 효율성 분석</h3>
+                        <p class="text-sm text-gray-500 mb-6">2026년 1월 평균 기준 (유류할증료 급등분 제외, 편도 시간 기준)</p>
+                        <div class="chart-container">
+                            <canvas id="flightChart"></canvas>
+                        </div>
+                        <div class="mt-6 bg-blue-50 border border-blue-100 p-4 rounded-xl text-sm text-gray-700 leading-relaxed">
+                            <strong class="text-brand-blue block mb-1">인천-카트만두 루트 요약:</strong>
+                            대한항공은 높은 비용 대신 비행시간(약 6.5시간)을 최소화하여 노약자 동반 시 유리합니다. 반면 중국동방/남방항공은 긴 경유 대기 시간이 발생하지만, 1인당 23kg 수화물 2개 허용과 저렴한 비용으로 다량의 사역 물품 운송에 최적화되어 있습니다.
+                        </div>
+                    </div>
+
+                    <div class="bg-brand-card rounded-2xl shadow-lg p-6 md:p-8 pdf-page-break">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2 flex items-center"><span class="text-2xl mr-2">&#128176;</span> 1인당 현지 예산 구조</h3>
+                        <p class="text-sm text-gray-500 mb-6">2022년 실제 결산 데이터 및 물가상승률 반영 (항공료 제외)</p>
+                        <div class="chart-container">
+                            <canvas id="budgetChart"></canvas>
+                        </div>
+                        <div class="mt-6 bg-amber-50 border border-amber-100 p-4 rounded-xl text-sm text-gray-700 leading-relaxed">
+                            <strong class="text-brand-amber block mb-1">일정별 예산 특징:</strong>
+                            1주일 일정은 수도권 중심 사역으로 약 60만 원이 예상됩니다. 2주일 일정(약 115만 원)은 지방(치트완/더란) 이동 비용과 장기 체류비가 추가되어 숙박/식대/차량 비중이 증가합니다.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="ministry" class="pt-24 scroll-mt-16">
+                <div class="mb-8 border-l-4 border-brand-sky pl-4">
+                    <h2 class="text-3xl font-bold text-brand-blue">2. 연령별 및 지역별 사역 모델</h2>
+                </div>
+                <p class="text-gray-700 mb-8 text-lg">
+                    차트는 장년층의 섬김 중심 사역과 청년층의 활동 중심 사역의 밸런스를 비교하며, 선택 가능한 세 곳의 주요 지역별 특징을 탐색할 수 있습니다. 각 연령과 상황에 맞는 맞춤형 기획이 가능합니다.
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+                    <div class="lg:col-span-3 bg-brand-card rounded-2xl shadow-lg p-6 md:p-8 pdf-page-break">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2 flex items-center"><span class="text-2xl mr-2">&#128101;</span> 연령대별 사역 집중 분야</h3>
+                        <p class="text-sm text-gray-500 mb-6">장년팀과 청년팀의 권장 사역 비중 비교</p>
+                        <div class="chart-container">
+                            <canvas id="ministryRadarChart"></canvas>
+                        </div>
+                        <div class="mt-4 grid grid-cols-2 gap-4">
+                            <div class="bg-gray-50 p-3 rounded-lg text-sm">
+                                <strong class="text-brand-blue">장년팀 특징:</strong> 예배 교제, 마을 주민 초청 식사 대접, 전문 은사(의료, 미용, 수리) 활용 봉사.
+                            </div>
+                            <div class="bg-gray-50 p-3 rounded-lg text-sm">
+                                <strong class="text-brand-amber">청년팀 특징:</strong> C2C 복음전도(4주 사전 줌 교육 필수), 어린이 운동회, 소그룹 활동, K-pop 공연.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-2 bg-brand-card rounded-2xl shadow-lg p-6 md:p-8 flex flex-col pdf-page-break">
+                        <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center"><span class="text-2xl mr-2">&#128205;</span> 타겟 지역 전략</h3>
+                        
+                        <div class="flex flex-col space-y-3 mb-6" id="region-buttons">
+                            <button id="btn-ktm" class="text-left px-5 py-4 rounded-xl border-2 border-brand-blue bg-blue-50 text-brand-blue font-bold shadow-sm transition">
+                                카트만두 / 둘리켈 (수도권)
+                            </button>
+                            <button id="btn-ctw" class="text-left px-5 py-4 rounded-xl border-2 border-gray-100 bg-white text-gray-600 font-semibold hover:border-gray-300 transition">
+                                치트완 (중남부 평원)
+                            </button>
+                            <button id="btn-drn" class="text-left px-5 py-4 rounded-xl border-2 border-gray-100 bg-white text-gray-600 font-semibold hover:border-gray-300 transition">
+                                더란 (동부 지역)
+                            </button>
+                        </div>
+
+                        <div id="region-info" class="bg-gray-50 p-5 rounded-xl border border-gray-200 flex-grow">
+                            <h4 class="text-lg font-bold text-brand-sky mb-3">수도권 사역 특징</h4>
+                            <ul class="space-y-3 text-sm text-gray-700">
+                                <li class="flex items-start"><span class="mr-2 text-brand-amber">✓</span> 이동이 매우 용이하여 신체적 부담이 적습니다.</li>
+                                <li class="flex items-start"><span class="mr-2 text-brand-amber">✓</span> 1주일 단기 팀이나 노약자가 포함된 팀에 가장 적합합니다.</li>
+                                <li class="flex items-start"><span class="mr-2 text-brand-amber">✓</span> 인프라를 활용한 연합 사역 및 다수 인원 통솔에 유리합니다.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="execution" class="pt-24 pb-12 scroll-mt-16">
+                <div class="mb-8 border-l-4 border-brand-rose pl-4">
+                    <h2 class="text-3xl font-bold text-brand-blue">3. 기본 일정 및 필수 안내 사항</h2>
+                </div>
+                <p class="text-gray-700 mb-8 text-lg">
+                    일정 기간에 따른 표준 사역 동선과, 네팔의 법적/문화적 특성상 선교팀 전체가 출국 전 반드시 숙지하고 준수해야 할 필수 주의사항 5가지입니다.
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    
+                    <div class="bg-brand-card rounded-2xl shadow-lg p-6 md:p-8 pdf-page-break">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-xl font-bold text-gray-800 flex items-center"><span class="text-2xl mr-2">&#128197;</span> 표준 일정 모델</h3>
+                            <div class="flex bg-gray-100 rounded-lg p-1" id="schedule-buttons">
+                                <button id="tab-1w" class="px-4 py-1.5 rounded-md bg-white shadow-sm text-sm font-bold text-brand-blue">1주일</button>
+                                <button id="tab-2w" class="px-4 py-1.5 rounded-md text-sm font-medium text-gray-500 hover:text-gray-800 transition">2주일</button>
+                            </div>
+                        </div>
+
+                        <div id="schedule-content" class="timeline-line pl-6 py-4 space-y-8 relative">
+                            </div>
+                        
+                        <div class="mt-8 bg-slate-50 border border-slate-200 p-4 rounded-lg text-sm text-gray-600 flex items-center">
+                            <span class="text-xl mr-3">&#128161;</span>
+                            <p>매일 오전 <strong>말씀 묵상(Q.T)</strong>과 매일 저녁 취침 전 <strong>사역 나눔 및 기도회</strong>, 그리고 일 3회 식사 시간이 기본적으로 포함됩니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-brand-card rounded-2xl shadow-lg p-6 md:p-8 pdf-page-break">
+                        <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center"><span class="text-2xl mr-2">&#9888;&#65039;</span> 5대 필수 주의사항</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="border border-gray-200 rounded-xl overflow-hidden">
+                                <button class="accordion-btn w-full px-5 py-4 text-left bg-gray-50 hover:bg-gray-100 transition flex justify-between items-center font-bold text-gray-800">
+                                    1. 세관 통과 및 수화물 분산
+                                    <span class="text-gray-400 transform transition-transform duration-200">&#9660;</span>
+                                </button>
+                                <div class="accordion-content hidden px-5 py-4 bg-white text-sm text-gray-600 leading-relaxed border-t border-gray-200" id="alert-1">
+                                    네팔 입국 시 세관이 엄격합니다. 선교 물품을 한 가방이나 플라스틱 박스에 몰아넣지 마시고 여러 개인 가방에 분산해 주십시오. 새 물건은 라벨을 제거하여 중고처럼 보이게 해야 합니다. 세관원이 가방 개방을 요구하면 응하시고, 세금(관세)을 요구할 경우 당황하지 말고 웃으며 흥정(Nego)하는 것이 지혜롭습니다.
+                                </div>
+                            </div>
+
+                            <div class="border border-gray-200 rounded-xl overflow-hidden">
+                                <button class="accordion-btn w-full px-5 py-4 text-left bg-gray-50 hover:bg-gray-100 transition flex justify-between items-center font-bold text-gray-800">
+                                    2. 선교 물품 현지 조달 원칙
+                                    <span class="text-gray-400 transform transition-transform duration-200">&#9660;</span>
+                                </button>
+                                <div class="accordion-content hidden px-5 py-4 bg-white text-sm text-gray-600 leading-relaxed border-t border-gray-200" id="alert-2">
+                                    가급적 물품 구입 재정을 선교지로 보내 현지에서 구매하시길 권장합니다. ①대량 물품의 세관 통과 위험 감소, ②지역 경제 활성화 효과, ③수화물 여유 공간 확보 때문입니다. 위탁 수화물 빈 공간에는 선교사 생필품을 채워 주시면 큰 격려가 됩니다.
+                                </div>
+                            </div>
+
+                            <div class="border border-gray-200 rounded-xl overflow-hidden">
+                                <button class="accordion-btn w-full px-5 py-4 text-left bg-gray-50 hover:bg-gray-100 transition flex justify-between items-center font-bold text-gray-800 text-brand-rose">
+                                    3. 의료 선교의 민감성 (법적 주의)
+                                    <span class="text-gray-400 transform transition-transform duration-200">&#9660;</span>
+                                </button>
+                                <div class="accordion-content hidden px-5 py-4 bg-white text-sm text-gray-600 leading-relaxed border-t border-gray-200" id="alert-3">
+                                    네팔 정부는 외국인의 의료 행위를 엄격히 규제합니다. 동사무소 및 보건소의 공식 허가가 필수이며, <strong>진료 시 반드시 현지 의사 1명 및 통역자 1명이 동행해야 합니다.</strong> 모든 의약품은 유통기한이 충분히 남은 것이어야 합니다.
+                                </div>
+                            </div>
+
+                            <div class="border border-gray-200 rounded-xl overflow-hidden">
+                                <button class="accordion-btn w-full px-5 py-4 text-left bg-gray-50 hover:bg-gray-100 transition flex justify-between items-center font-bold text-gray-800">
+                                    4. 건강 및 지병 사전 관리
+                                    <span class="text-gray-400 transform transition-transform duration-200">&#9660;</span>
+                                </button>
+                                <div class="accordion-content hidden px-5 py-4 bg-white text-sm text-gray-600 leading-relaxed border-t border-gray-200" id="alert-4">
+                                    고산병 위험(주로 2,500m 이상) 및 급격한 기후 변화를 대비하여 3년 이내 심혈관, 뇌혈관 질환 이력이 있으신 분은 사전 의사 진단이 필수입니다. 또한, 네팔의 도로 사정이 매우 열악하므로 허리/관절 질환자는 사전에 충분한 치료와 운동 후 합류하셔야 합니다.
+                                </div>
+                            </div>
+
+                            <div class="border border-gray-200 rounded-xl overflow-hidden">
+                                <button class="accordion-btn w-full px-5 py-4 text-left bg-gray-50 hover:bg-gray-100 transition flex justify-between items-center font-bold text-gray-800">
+                                    5. 비자 및 현지 힌두 문화 존중
+                                    <span class="text-gray-400 transform transition-transform duration-200">&#9660;</span>
+                                </button>
+                                <div class="accordion-content hidden px-5 py-4 bg-white text-sm text-gray-600 leading-relaxed border-t border-gray-200" id="alert-5">
+                                    네팔은 도착비자 발급 시 USD 현금과 여권용 사진이 필요합니다. 힌두교 문화권이므로 노출이 심한 옷(반바지, 민소매)은 피해주시고, 공개적이고 공격적인 노방전도는 현지 <strong>개종금지법(Anti-Conversion Law)</strong>에 저촉될 수 있으므로 철저히 관계 중심의 지혜로운 접근이 필요합니다.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="bg-gray-900 text-gray-400 py-10 text-center text-sm border-t-4 border-brand-blue">
+        <p class="mb-2">본 문서는 후원교회의 원활한 단기선교 준비를 위해 최신 데이터를 바탕으로 제작되었습니다.</p>
+        <p>&copy; 2026 KPM 네팔 선교부 최우성. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // PDF 생성 (html2pdf) 로직
+        document.addEventListener('DOMContentLoaded', () => {
+            const downloadPdfBtn = document.getElementById('downloadPdfBtn');
+            const btnContainer = document.getElementById('downloadBtnContainer');
+            
+            if (downloadPdfBtn) {
+                downloadPdfBtn.addEventListener('click', () => {
+                    const originalHTML = downloadPdfBtn.innerHTML;
+                    
+                    // 로딩 상태 표시
+                    downloadPdfBtn.innerHTML = '<span class="mr-3 text-2xl">&#8987;</span><div class="text-left"><div class="text-sm font-normal leading-tight">PDF 생성 중...</div><div class="text-lg leading-tight">잠시만 기다려주세요</div></div>';
+                    downloadPdfBtn.disabled = true;
+
+                    // 인쇄를 위해 아코디언(주의사항) 모두 펼치기
+                    const contents = document.querySelectorAll('.accordion-content');
+                    contents.forEach(el => el.classList.remove('hidden'));
+
+                    // PDF에 찍히지 않게 버튼 숨기기
+                    btnContainer.style.display = 'none';
+
+                    const element = document.getElementById('pdf-content-area');
+
+                    const opt = {
+                        margin:       [10, 10, 10, 10],
+                        filename:     '네팔단기선교제안서_최우성.pdf',
+                        image:        { type: 'jpeg', quality: 0.98 },
+                        html2canvas:  { scale: 2, useCORS: true, windowWidth: 1200 }, // 넓이 고정으로 디자인 깨짐 방지
+                        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                    };
+
+                    html2pdf().set(opt).from(element).save().then(() => {
+                        // 저장 완료 후 원상 복구
+                        downloadPdfBtn.innerHTML = originalHTML;
+                        downloadPdfBtn.disabled = false;
+                        btnContainer.style.display = 'block';
+                    });
+                });
+            }
+        });
+
+        const wrapLabel = (text) => {
+            if (text.length <= 16) return text;
+            const words = text.split(' ');
+            const lines = [];
+            let currentLine = words[0] || '';
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + words[i].length + 1 <= 16) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            if (currentLine) lines.push(currentLine);
+            return lines;
+        };
+
+        const chartTooltipConfig = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                              return label.join(' ');
+                            } else {
+                              return label;
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        const initCharts = () => {
+            // Chart.js 애니메이션을 끄면 PDF 변환 시 빈 화면이 나오는 오류를 방지합니다.
+            Chart.defaults.animation = false;
+
+            const flightCtx = document.getElementById('flightChart').getContext('2d');
+            new Chart(flightCtx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        wrapLabel('대한항공 (인천 직항)'),
+                        wrapLabel('중국남방항공 (광저우 경유)'),
+                        wrapLabel('중국동방항공 (쿤밍 경유)')
+                    ],
+                    datasets: [
+                        {
+                            label: '평균 예상 항공료 (만 원)',
+                            data: [120, 72.5, 62.5],
+                            backgroundColor: '#0EA5E9',
+                            borderRadius: 6,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: '최소 소요 시간 (시간)',
+                            data: [6.5, 11, 12.5],
+                            type: 'line',
+                            borderColor: '#F59E0B',
+                            backgroundColor: '#F59E0B',
+                            borderWidth: 3,
+                            pointRadius: 6,
+                            tension: 0.1,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    ...chartTooltipConfig,
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: { display: true, text: '항공료 (단위: 만 원)' }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            grid: { drawOnChartArea: false },
+                            title: { display: true, text: '편도 소요 시간 (시간)' },
+                            min: 0,
+                            max: 15
+                        }
+                    }
+                }
+            });
+
+            const budgetCtx = document.getElementById('budgetChart').getContext('2d');
+            new Chart(budgetCtx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        wrapLabel('1주일 (7일) 일정'),
+                        wrapLabel('2주일 (14일) 일정')
+                    ],
+                    datasets: [
+                        {
+                            label: wrapLabel('현지 체류비 (숙박/식대/이동)'),
+                            data: [40, 80],
+                            backgroundColor: '#1E3A8A',
+                            borderRadius: { topLeft: 0, topRight: 0, bottomLeft: 4, bottomRight: 4 }
+                        },
+                        {
+                            label: wrapLabel('현지 사역비 (전도/행사/구제)'),
+                            data: [20, 35],
+                            backgroundColor: '#F59E0B',
+                            borderRadius: { topLeft: 4, topRight: 4, bottomLeft: 0, bottomRight: 0 }
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    ...chartTooltipConfig,
+                    scales: {
+                        x: { stacked: true },
+                        y: { 
+                            stacked: true,
+                            title: { display: true, text: '1인당 예산 합계 (만 원)' }
+                        }
+                    }
+                }
+            });
+
+            const radarCtx = document.getElementById('ministryRadarChart').getContext('2d');
+            new Chart(radarCtx, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        wrapLabel('관계 형성 및 교제'),
+                        wrapLabel('이웃 초청 식사/공연'),
+                        wrapLabel('전문/육체적 봉사'),
+                        wrapLabel('어린이/청소년 활동'),
+                        wrapLabel('C2C 복음전도')
+                    ],
+                    datasets: [
+                        {
+                            label: '장년팀 (관계 및 섬김)',
+                            data: [95, 80, 90, 30, 20],
+                            backgroundColor: 'rgba(30, 58, 138, 0.2)',
+                            borderColor: '#1E3A8A',
+                            pointBackgroundColor: '#1E3A8A',
+                            borderWidth: 2
+                        },
+                        {
+                            label: '청년팀 (복음 및 활동)',
+                            data: [30, 70, 50, 95, 95],
+                            backgroundColor: 'rgba(245, 158, 11, 0.2)',
+                            borderColor: '#F59E0B',
+                            pointBackgroundColor: '#F59E0B',
+                            borderWidth: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    ...chartTooltipConfig,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: { display: false }
+                        }
+                    }
+                }
+            });
+        };
+
+        const regionData = {
+            'ktm': {
+                title: '수도권 사역 특징',
+                items: [
+                    '<strong>접근성:</strong> 이동이 매우 용이하여 신체적 부담이 적습니다.',
+                    '<strong>적합성:</strong> 1주일 단기 팀이나 노약자가 포함된 팀에 가장 적합합니다.',
+                    '<strong>사역 특성:</strong> 인프라를 활용한 연합 사역 및 다수 인원 통솔에 유리합니다.'
+                ]
+            },
+            'ctw': {
+                title: '치트완 평원 사역 특징',
+                items: [
+                    '<strong>접근성:</strong> 카트만두에서 차량으로 6~8시간 이동이 필요합니다.',
+                    '<strong>적합성:</strong> 정글 지역으로, 타루족 등 소수민족 사역에 특화되어 있습니다.',
+                    '<strong>사역 특성:</strong> 색다른 환경에서의 몰입도 높은 활동이 요구되는 팀에 적합합니다.'
+                ]
+            },
+            'drn': {
+                title: '더란 동부 사역 특징',
+                items: [
+                    '<strong>접근성:</strong> 차량 12시간 이상 또는 국내선 항공 이동이 필수적입니다.',
+                    '<strong>적합성:</strong> 장거리 이동을 소화할 수 있는 청년 위주의 2주 일정 팀에 적합합니다.',
+                    '<strong>사역 특성:</strong> 현지 교회의 자립도가 매우 높아 대등한 파트너십 협력 사역에 유리합니다.'
+                ]
+            }
+        };
+
+        const initRegionToggle = () => {
+            const btns = ['btn-ktm', 'btn-ctw', 'btn-drn'];
+            btns.forEach(id => {
+                document.getElementById(id).addEventListener('click', (e) => {
+                    btns.forEach(b => {
+                        const el = document.getElementById(b);
+                        el.className = 'text-left px-5 py-4 rounded-xl border-2 border-gray-100 bg-white text-gray-600 font-semibold hover:border-gray-300 transition';
+                    });
+                    e.target.className = 'text-left px-5 py-4 rounded-xl border-2 border-brand-blue bg-blue-50 text-brand-blue font-bold shadow-sm transition';
+                    
+                    const dataKey = id.split('-')[1];
+                    const infoData = regionData[dataKey];
+                    
+                    let html = '<h4 class="text-lg font-bold text-brand-sky mb-3">' + infoData.title + '</h4>';
+                    html += '<ul class="space-y-3 text-sm text-gray-700">';
+                    infoData.items.forEach(item => {
+                        html += '<li class="flex items-start"><span class="mr-2 text-brand-amber">✓</span> ' + item + '</li>';
+                    });
+                    html += '</ul>';
+                    
+                    document.getElementById('region-info').innerHTML = html;
+                });
+            });
+        };
+
+        const scheduleData = {
+            '1w': [
+                { day: '1일차', title: '입국 및 오리엔테이션', desc: '인천 출국 및 카트만두 도착', color: 'border-brand-blue' },
+                { day: '2~4일차', title: '수도권 사역 집중', desc: '현지 교회 협력 사역 (예배, C2C 전도, 벽화, 초청잔치)', color: 'border-brand-amber', badge: '핵심 사역' },
+                { day: '5~6일차', title: '네팔 자연 탐방', desc: '히말라야 조망 등 영육 간의 휴식', color: 'border-brand-sky' },
+                { day: '7일차', title: '귀국', desc: '사역 평가회, 카트만두 출발 및 인천 도착', color: 'border-gray-300' }
+            ],
+            '2w': [
+                { day: '1일차', title: '입국 및 오리엔테이션', desc: '인천 출국 및 카트만두 도착', color: 'border-brand-blue' },
+                { day: '2일차', title: '사역지 이동', desc: '지방 사역지(치트완/더란)로 차량 또는 국내선 이동', color: 'border-gray-400' },
+                { day: '3~8일차', title: '지방 사역 집중', desc: '현지 교회 연합 사역 (기능별 봉사, 운동회, 전도)', color: 'border-brand-amber', badge: '장기 사역' },
+                { day: '9일차', title: '수도권 귀환', desc: '카트만두로 차량/국내선 귀환 이동', color: 'border-gray-400' },
+                { day: '10~13일차', title: '문화 탐방 및 휴식', desc: '카트만두 밸리 문화 탐방 및 피로 회복', color: 'border-brand-sky' },
+                { day: '14일차', title: '귀국', desc: '사역 최종 평가회, 카트만두 출발 및 인천 도착', color: 'border-gray-300' }
+            ]
+        };
+
+        const renderSchedule = (type) => {
+            const container = document.getElementById('schedule-content');
+            container.innerHTML = '';
+            scheduleData[type].forEach(item => {
+                let badgeStr = item.badge ? '<span class="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800">' + item.badge + '</span>' : '';
+                container.innerHTML += 
+                    '<div class="relative pl-8">' +
+                        '<div class="timeline-dot ' + item.color + '"></div>' +
+                        '<h4 class="text-base font-bold text-gray-900">' + item.day + ' : ' + item.title + badgeStr + '</h4>' +
+                        '<p class="mt-1 text-sm text-gray-500">' + item.desc + '</p>' +
+                    '</div>';
+            });
+        };
+
+        const initScheduleToggle = () => {
+            document.getElementById('tab-1w').addEventListener('click', (e) => {
+                e.target.className = 'px-4 py-1.5 rounded-md bg-white shadow-sm text-sm font-bold text-brand-blue';
+                document.getElementById('tab-2w').className = 'px-4 py-1.5 rounded-md text-sm font-medium text-gray-500 hover:text-gray-800 transition';
+                renderSchedule('1w');
+            });
+            document.getElementById('tab-2w').addEventListener('click', (e) => {
+                e.target.className = 'px-4 py-1.5 rounded-md bg-white shadow-sm text-sm font-bold text-brand-blue';
+                document.getElementById('tab-1w').className = 'px-4 py-1.5 rounded-md text-sm font-medium text-gray-500 hover:text-gray-800 transition';
+                renderSchedule('2w');
+            });
+            renderSchedule('1w'); // initial
+        };
+
+        const initAccordions = () => {
+            const btns = document.querySelectorAll('.accordion-btn');
+            btns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const content = btn.nextElementSibling;
+                    const icon = btn.querySelector('span');
+                    if (content.classList.contains('hidden')) {
+                        content.classList.remove('hidden');
+                        icon.style.transform = 'rotate(180deg)';
+                    } else {
+                        content.classList.add('hidden');
+                        icon.style.transform = 'rotate(0deg)';
+                    }
+                });
+            });
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initCharts();
+            initRegionToggle();
+            initScheduleToggle();
+            initAccordions();
+        });
+    </script>
+</body>
+</html>
